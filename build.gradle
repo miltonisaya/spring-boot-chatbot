@@ -1,29 +1,49 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '4.0.4'
-	id 'io.spring.dependency-management' version '1.1.7'
+    id 'java'
+    id 'org.springframework.boot' version '4.0.4'
+    id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'com.watabelabs'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(25)
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
+}
+
+ext {
+    langchain4jVersion          = '1.12.2'
+    langchain4jBetaVersion      = '1.0.1-beta6'  // pgvector & spring-boot-starter lag behind on stable releases
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
-	runtimeOnly 'org.postgresql:postgresql'
-	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // Spring Boot
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // LangChain4j core + OpenAI
+    implementation "dev.langchain4j:langchain4j:${langchain4jVersion}"
+    implementation "dev.langchain4j:langchain4j-open-ai:${langchain4jVersion}"
+
+    // LangChain4j Spring Boot auto-configuration (still on beta track)
+    implementation "dev.langchain4j:langchain4j-spring-boot-starter:${langchain4jBetaVersion}"
+
+    // LangChain4j pgvector (still on beta track)
+    implementation "dev.langchain4j:langchain4j-pgvector:${langchain4jBetaVersion}"
+
+    // PostgreSQL JDBC driver
+    runtimeOnly 'org.postgresql:postgresql'
+
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
