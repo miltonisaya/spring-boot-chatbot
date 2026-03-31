@@ -18,23 +18,17 @@ repositories {
 }
 
 ext {
-    langchain4jVersion          = '1.12.2'
-    langchain4jBetaVersion      = '1.0.1-beta6'  // pgvector & spring-boot-starter lag behind on stable releases
+    langchain4jVersion = '1.12.2'
 }
 
 dependencies {
     // Spring Boot
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
-    // LangChain4j core + OpenAI
+    // LangChain4j core + Ollama
     implementation "dev.langchain4j:langchain4j:${langchain4jVersion}"
-    implementation "dev.langchain4j:langchain4j-open-ai:${langchain4jVersion}"
-
-    // LangChain4j Spring Boot auto-configuration (still on beta track)
-    implementation "dev.langchain4j:langchain4j-spring-boot-starter:${langchain4jBetaVersion}"
-
-    // LangChain4j pgvector (still on beta track)
-    implementation "dev.langchain4j:langchain4j-pgvector:${langchain4jBetaVersion}"
+    implementation "dev.langchain4j:langchain4j-ollama:${langchain4jVersion}"
 
     // PostgreSQL JDBC driver
     runtimeOnly 'org.postgresql:postgresql'
@@ -47,3 +41,4 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
