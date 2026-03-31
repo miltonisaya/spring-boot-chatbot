@@ -30,6 +30,9 @@ dependencies {
     implementation "dev.langchain4j:langchain4j:${langchain4jVersion}"
     implementation "dev.langchain4j:langchain4j-ollama:${langchain4jVersion}"
 
+    // Swagger / OpenAPI
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6'
+
     // PostgreSQL JDBC driver
     runtimeOnly 'org.postgresql:postgresql'
 
