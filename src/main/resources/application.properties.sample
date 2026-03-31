@@ -1,0 +1,11 @@
+spring.application.name=chatbot
+
+# PostgreSQL datasource
+spring.datasource.url=jdbc:postgresql://localhost:5432/your_database
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# Ollama
+ollama.base-url=http://localhost:11434
+ollama.model=llama3.2
